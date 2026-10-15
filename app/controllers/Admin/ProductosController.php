@@ -2,9 +2,15 @@
 namespace App\Controllers\Admin;
 
 use Core\Controller;
+use App\Models\Admin\Categorias; 
 
 class ProductosController extends Controller
 {
+    protected $categoriasModel;
+    public function __construct()
+    {
+        $this->categoriasModel = new Categorias();
+    }
     public function index()
     {
         $this->view('admin/productos/index', [
@@ -14,7 +20,7 @@ class ProductosController extends Controller
         exit;
     }
     public function nuevo(){
-        $categorias = ['Electrónica', 'Ropa', 'Hogar'];
+        $categorias = $this->categoriasModel->categirias__select();
         $this->view('admin/productos/nuevo', [
             'isAdmin'   => true,
             'module'    => 'admin',
@@ -23,4 +29,14 @@ class ProductosController extends Controller
         ]);
         exit;
     }
+    public function guardar(){
+    $data = $_POST;
+    //validar datos
+    if(!empty($data['categoria']) && !empty($data['codigo']) && !empty($data['nombre']) && !empty($data['descripcion']) && !empty($data['precio']) && !empty($data['stock'])){
+        //guardar producto
+        //llmar al modelo de productos para guardar el producto en la base de datos
+    }else{
+        header('Location: ' . BASE_URL . '/admin/productos/nuevo');
+    }
+}
 }

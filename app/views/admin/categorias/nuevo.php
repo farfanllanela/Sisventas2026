@@ -11,6 +11,7 @@
             </div>
         </form>
     </div>
+    
 <?php else: ?>
     <div class="alert alert-danger" role="alert">
         No tienes permisos para acceder a esta página.
